@@ -22,7 +22,7 @@
     <!-- API KEY BANNER -->
     <div class="api-banner" id="api-banner">
       <span class="warn-icon">⚠</span>
-      <span>API key required to run tools. </span>
+      <span>Anthropic API key required for Port Scanner, Nmap &amp; Web Hacking. </span>
       <button class="link-btn" onclick="openApiModal()">Configure API Key →</button>
     </div>
 
@@ -35,8 +35,11 @@
       <button class="tab" onclick="switchTab('web', this)">[ Web Hacking ]</button>
     </div>
 
-    <!-- PORT SCANNER -->
+    <!-- ══════════════════════════════════════
+         TAB: PORT SCANNER  (AI-powered)
+    ══════════════════════════════════════ -->
     <div id="tab-port" class="panel active">
+      <div class="badge ai-badge">AI-Powered</div>
       <div class="input-row">
         <div class="field"><label>Target Host / IP</label><input id="ps-host" placeholder="e.g. 192.168.1.1 or example.com" /></div>
         <div class="field short"><label>Port Range</label><input id="ps-range" placeholder="1-1024" value="1-1024" /></div>
@@ -44,10 +47,10 @@
       </div>
       <div class="options-grid">
         <button class="opt-btn sel" id="ps-common" onclick="toggleOpt('ps-common')">Common Ports (top 100)</button>
-        <button class="opt-btn" id="ps-web" onclick="toggleOpt('ps-web')">Web Ports (80,443,8080…)</button>
-        <button class="opt-btn" id="ps-db" onclick="toggleOpt('ps-db')">Database Ports</button>
-        <button class="opt-btn" id="ps-ftp" onclick="toggleOpt('ps-ftp')">FTP / SSH / Telnet</button>
-        <button class="opt-btn" id="ps-vuln" onclick="toggleOpt('ps-vuln')">Check for Vulns</button>
+        <button class="opt-btn" id="ps-web"    onclick="toggleOpt('ps-web')">Web Ports (80,443,8080…)</button>
+        <button class="opt-btn" id="ps-db"     onclick="toggleOpt('ps-db')">Database Ports</button>
+        <button class="opt-btn" id="ps-ftp"    onclick="toggleOpt('ps-ftp')">FTP / SSH / Telnet</button>
+        <button class="opt-btn" id="ps-vuln"   onclick="toggleOpt('ps-vuln')">Check for Vulns</button>
       </div>
       <div class="term-header">
         <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
@@ -56,93 +59,114 @@
       <div class="terminal" id="port-out"><span class="line muted">// awaiting target...</span></div>
     </div>
 
-    <!-- NMAP -->
+    <!-- ══════════════════════════════════════
+         TAB: NMAP  (AI-powered)
+    ══════════════════════════════════════ -->
     <div id="tab-nmap" class="panel">
+      <div class="badge ai-badge">AI-Powered</div>
       <div class="input-row">
         <div class="field"><label>Target</label><input id="nm-host" placeholder="IP, hostname, or CIDR range" /></div>
         <div class="field short"><label>Scan Type</label>
           <select id="nm-type">
-            <option value="sV">-sV (Service/Version)</option>
-            <option value="sS">-sS (SYN Stealth)</option>
-            <option value="O">-O (OS Detection)</option>
-            <option value="A">-A (Aggressive)</option>
-            <option value="sU">-sU (UDP Scan)</option>
-            <option value="p">-p (Custom Ports)</option>
-            <option value="sn">-sn (Ping Sweep)</option>
-            <option value="script">--script (NSE)</option>
+            <option value="sV">-sV  (Service/Version Detection)</option>
+            <option value="sS">-sS  (SYN Stealth Scan)</option>
+            <option value="O">-O   (OS Detection)</option>
+            <option value="A">-A   (Aggressive)</option>
+            <option value="sU">-sU  (UDP Scan)</option>
+            <option value="p">-p   (Custom Ports)</option>
+            <option value="sn">-sn  (Ping Sweep / Host Discovery)</option>
+            <option value="script">--script (NSE Scripts)</option>
           </select>
         </div>
         <button class="btn" onclick="runNmap()">▶ EXECUTE</button>
       </div>
       <div class="input-row">
-        <div class="field"><label>Additional Flags / NSE Script</label><input id="nm-flags" placeholder="e.g. --script=vuln or -T4 -Pn" /></div>
+        <div class="field"><label>Additional Flags / NSE Script Name</label>
+          <input id="nm-flags" placeholder="e.g. --script=vuln  or  -T4 -Pn  or  -p 22,80,443" />
+        </div>
       </div>
       <div class="term-header">
         <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
         <div class="term-title">NMAP SIMULATION OUTPUT</div>
       </div>
-      <div class="terminal" id="nmap-out"><span class="line muted">// configure scan and execute...</span></div>
+      <div class="terminal" id="nmap-out"><span class="line muted">// configure scan parameters and execute...</span></div>
     </div>
 
-    <!-- DNS LOOKUP -->
+    <!-- ══════════════════════════════════════
+         TAB: DNS LOOKUP  (REAL — Google DoH)
+    ══════════════════════════════════════ -->
     <div id="tab-dns" class="panel">
+      <div class="badge real-badge">Live API — No Key Needed</div>
       <div class="input-row">
         <div class="field"><label>Domain</label><input id="dns-domain" placeholder="example.com" /></div>
         <div class="field short"><label>Record Type</label>
           <select id="dns-type">
-            <option>A</option><option>AAAA</option><option>MX</option><option>NS</option>
-            <option>TXT</option><option>CNAME</option><option>SOA</option><option>PTR</option><option>ALL</option>
+            <option>A</option>
+            <option>AAAA</option>
+            <option>MX</option>
+            <option>NS</option>
+            <option>TXT</option>
+            <option>CNAME</option>
+            <option>SOA</option>
+            <option>PTR</option>
+            <option>ALL</option>
           </select>
         </div>
         <button class="btn" onclick="runDNS()">▶ RESOLVE</button>
       </div>
       <div class="options-grid">
-        <button class="opt-btn sel" id="dns-sub" onclick="toggleOpt('dns-sub')">Subdomain Enum</button>
-        <button class="opt-btn" id="dns-zone" onclick="toggleOpt('dns-zone')">Zone Transfer</button>
-        <button class="opt-btn" id="dns-rev" onclick="toggleOpt('dns-rev')">Reverse DNS</button>
-        <button class="opt-btn" id="dns-spf" onclick="toggleOpt('dns-spf')">SPF / DMARC Check</button>
+        <button class="opt-btn sel" id="dns-sub"  onclick="toggleOpt('dns-sub')">Subdomain Enumeration</button>
+        <button class="opt-btn"     id="dns-zone" onclick="toggleOpt('dns-zone')">Zone Transfer (AXFR)</button>
+        <button class="opt-btn"     id="dns-rev"  onclick="toggleOpt('dns-rev')">Reverse DNS</button>
+        <button class="opt-btn"     id="dns-spf"  onclick="toggleOpt('dns-spf')">SPF / DMARC Check</button>
       </div>
       <div class="term-header">
         <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
-        <div class="term-title">DNS QUERY OUTPUT</div>
+        <div class="term-title">DNS QUERY OUTPUT — powered by dns.google</div>
       </div>
-      <div class="terminal" id="dns-out"><span class="line muted">// enter domain to resolve...</span></div>
+      <div class="terminal" id="dns-out"><span class="line muted">// enter a domain name to begin real DNS resolution...</span></div>
     </div>
 
-    <!-- WHOIS -->
+    <!-- ══════════════════════════════════════
+         TAB: WHOIS  (REAL — RDAP + ip-api.com)
+    ══════════════════════════════════════ -->
     <div id="tab-whois" class="panel">
+      <div class="badge real-badge">Live API — No Key Needed</div>
       <div class="input-row">
-        <div class="field"><label>Domain / IP</label><input id="wi-target" placeholder="example.com or 8.8.8.8" /></div>
+        <div class="field"><label>Domain or IP Address</label><input id="wi-target" placeholder="example.com  or  8.8.8.8" /></div>
         <button class="btn" onclick="runWhois()">▶ QUERY</button>
       </div>
       <div class="options-grid">
-        <button class="opt-btn sel" id="wi-reg" onclick="toggleOpt('wi-reg')">Registrar Info</button>
+        <button class="opt-btn sel" id="wi-reg"   onclick="toggleOpt('wi-reg')">Registrar Info</button>
         <button class="opt-btn sel" id="wi-dates" onclick="toggleOpt('wi-dates')">Expiry Dates</button>
-        <button class="opt-btn" id="wi-ns" onclick="toggleOpt('wi-ns')">Nameservers</button>
-        <button class="opt-btn" id="wi-geo" onclick="toggleOpt('wi-geo')">IP Geolocation</button>
+        <button class="opt-btn sel" id="wi-ns"    onclick="toggleOpt('wi-ns')">Nameservers</button>
+        <button class="opt-btn sel" id="wi-geo"   onclick="toggleOpt('wi-geo')">IP Geolocation</button>
       </div>
       <div class="term-header">
         <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
-        <div class="term-title">WHOIS OUTPUT</div>
+        <div class="term-title">WHOIS OUTPUT — powered by rdap.org + ip-api.com</div>
       </div>
-      <div class="terminal" id="whois-out"><span class="line muted">// enter target to query...</span></div>
+      <div class="terminal" id="whois-out"><span class="line muted">// enter a domain or IP address to query real WHOIS data...</span></div>
     </div>
 
-    <!-- WEB HACKING -->
+    <!-- ══════════════════════════════════════
+         TAB: WEB HACKING  (AI-powered)
+    ══════════════════════════════════════ -->
     <div id="tab-web" class="panel">
+      <div class="badge ai-badge">AI-Powered</div>
       <div class="input-row">
         <div class="field"><label>Target URL</label><input id="wh-url" placeholder="https://example.com" /></div>
         <button class="btn" onclick="runWebHack()">▶ ANALYZE</button>
       </div>
       <div class="options-grid">
         <button class="opt-btn sel" id="wh-headers" onclick="toggleOpt('wh-headers')">HTTP Headers</button>
-        <button class="opt-btn sel" id="wh-xss" onclick="toggleOpt('wh-xss')">XSS Vectors</button>
-        <button class="opt-btn sel" id="wh-sqli" onclick="toggleOpt('wh-sqli')">SQL Injection</button>
-        <button class="opt-btn" id="wh-csrf" onclick="toggleOpt('wh-csrf')">CSRF Detection</button>
-        <button class="opt-btn" id="wh-dir" onclick="toggleOpt('wh-dir')">Dir Busting</button>
-        <button class="opt-btn" id="wh-ssl" onclick="toggleOpt('wh-ssl')">SSL/TLS Audit</button>
-        <button class="opt-btn" id="wh-cors" onclick="toggleOpt('wh-cors')">CORS Misconfig</button>
-        <button class="opt-btn" id="wh-cve" onclick="toggleOpt('wh-cve')">CVE Lookup</button>
+        <button class="opt-btn sel" id="wh-xss"     onclick="toggleOpt('wh-xss')">XSS Vectors</button>
+        <button class="opt-btn sel" id="wh-sqli"    onclick="toggleOpt('wh-sqli')">SQL Injection</button>
+        <button class="opt-btn"     id="wh-csrf"    onclick="toggleOpt('wh-csrf')">CSRF Detection</button>
+        <button class="opt-btn"     id="wh-dir"     onclick="toggleOpt('wh-dir')">Dir Busting</button>
+        <button class="opt-btn"     id="wh-ssl"     onclick="toggleOpt('wh-ssl')">SSL/TLS Audit</button>
+        <button class="opt-btn"     id="wh-cors"    onclick="toggleOpt('wh-cors')">CORS Misconfig</button>
+        <button class="opt-btn"     id="wh-cve"     onclick="toggleOpt('wh-cve')">CVE Lookup</button>
       </div>
       <div class="term-header">
         <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
@@ -153,28 +177,34 @@
 
     <!-- FOOTER -->
     <div class="footer">
-      <span>⚠ FOR EDUCATIONAL &amp; AUTHORIZED USE ONLY — NEVER TEST SYSTEMS WITHOUT PERMISSION</span>
+      ⚠ FOR EDUCATIONAL &amp; AUTHORIZED USE ONLY — NEVER TEST SYSTEMS WITHOUT EXPLICIT PERMISSION
     </div>
 
-  </div>
+  </div><!-- /container -->
 
-  <!-- API KEY MODAL -->
+  <!-- ══ API KEY MODAL ══ -->
   <div class="modal-overlay" id="modal-overlay" onclick="closeApiModal()">
     <div class="modal" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <span class="modal-title">// CONFIGURE API KEY</span>
+        <span class="modal-title">// CONFIGURE ANTHROPIC API KEY</span>
         <button class="modal-close" onclick="closeApiModal()">✕</button>
       </div>
-      <p class="modal-desc">Enter your Anthropic API key. It is stored only in your browser's localStorage and never sent anywhere except directly to <code>api.anthropic.com</code>.</p>
-      <label class="field">
-        <span style="font-size:11px;color:var(--muted);letter-spacing:1px;display:block;margin-bottom:4px">ANTHROPIC API KEY</span>
-        <input type="password" id="api-key-input" placeholder="sk-ant-..." />
-      </label>
-      <div style="display:flex;gap:8px;margin-top:1rem">
-        <button class="btn" onclick="saveApiKey()">SAVE KEY</button>
-        <button class="btn danger" onclick="clearApiKey()">CLEAR KEY</button>
+      <p class="modal-desc">
+        Required for Port Scanner, Nmap, and Web Hacking (AI-simulated tools).<br>
+        DNS Lookup and Whois use free public APIs — no key needed for those.<br><br>
+        Your key is stored only in your browser's <code>localStorage</code> and sent directly to <code>api.anthropic.com</code>.
+      </p>
+      <div class="field">
+        <label>ANTHROPIC API KEY</label>
+        <input type="password" id="api-key-input" placeholder="sk-ant-api03-..." />
       </div>
-      <p class="modal-hint">Get your key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></p>
+      <div style="display:flex;gap:8px;margin-top:1rem">
+        <button class="btn" onclick="saveApiKey()">✔ SAVE KEY</button>
+        <button class="btn danger" onclick="clearApiKey()">✕ CLEAR KEY</button>
+      </div>
+      <p class="modal-hint">
+        Get your key at <a href="https://console.anthropic.com/settings/api-keys" target="_blank" rel="noopener">console.anthropic.com →</a>
+      </p>
     </div>
   </div>
 
