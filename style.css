@@ -1,6 +1,6 @@
-/* =========================================
-   Pentrix.sh — Terminal Hacker Aesthetic
-   ========================================= */
+/* =============================================
+   Pentrix.sh — Terminal Hacker Stylesheet
+   ============================================= */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -9,19 +9,18 @@
 }
 
 :root {
-  --bg: #0a0c0f;
-  --panel: #0f1318;
-  --border: #1a2a1a;
-  --green: #00ff41;
-  --dgreen: #00c930;
-  --dim: #111a11;
-  --text: #c8ffc8;
-  --muted: #4a7a4a;
-  --red: #ff4141;
-  --amber: #ffa500;
-  --blue: #41c8ff;
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
-  --font-ui: 'Rajdhani', sans-serif;
+  --bg:      #0a0c0f;
+  --panel:   #0f1318;
+  --border:  #1a2a1a;
+  --green:   #00ff41;
+  --dgreen:  #00c930;
+  --dim:     #111a11;
+  --text:    #c8ffc8;
+  --muted:   #4a7a4a;
+  --red:     #ff4141;
+  --amber:   #ffa500;
+  --blue:    #41c8ff;
+  --purple:  #bf7fff;
 }
 
 html { scroll-behavior: smooth; }
@@ -29,12 +28,12 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-mono);
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
   min-height: 100vh;
   font-size: 14px;
 }
 
-/* ── SCANLINE overlay ── */
+/* Scanline CRT overlay */
 body::before {
   content: '';
   position: fixed;
@@ -43,18 +42,18 @@ body::before {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 255, 65, 0.015) 2px,
-    rgba(0, 255, 65, 0.015) 4px
+    rgba(0, 255, 65, 0.013) 2px,
+    rgba(0, 255, 65, 0.013) 4px
   );
   pointer-events: none;
   z-index: 9999;
 }
 
-/* ── CONTAINER ── */
+/* ── LAYOUT ── */
 .container {
-  max-width: 960px;
+  max-width: 980px;
   margin: 0 auto;
-  padding: 1.5rem 1rem 3rem;
+  padding: 1.5rem 1.2rem 4rem;
 }
 
 /* ── HEADER ── */
@@ -77,14 +76,14 @@ body::before {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--green); }
-  50% { opacity: 0.4; box-shadow: none; }
+  0%, 100% { opacity: 1;  box-shadow: 0 0 8px var(--green); }
+  50%       { opacity: .4; box-shadow: none; }
 }
 
 .logo {
-  font-family: var(--font-ui);
+  font-family: 'Rajdhani', sans-serif;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 26px;
   color: var(--green);
   letter-spacing: 4px;
   text-transform: uppercase;
@@ -96,15 +95,15 @@ body::before {
   font-size: 11px;
   color: var(--muted);
   margin-left: auto;
-  font-family: var(--font-ui);
+  font-family: 'Rajdhani', sans-serif;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
-/* ── API BANNER ── */
+/* ── BANNERS ── */
 .api-banner {
-  background: rgba(255, 165, 0, 0.08);
-  border: 1px solid rgba(255, 165, 0, 0.3);
+  background: rgba(255,165,0,.07);
+  border: 1px solid rgba(255,165,0,.3);
   color: var(--amber);
   padding: 8px 14px;
   font-size: 12px;
@@ -112,18 +111,18 @@ body::before {
   display: flex;
   align-items: center;
   gap: 8px;
-  letter-spacing: 0.5px;
+  flex-wrap: wrap;
+  letter-spacing: .5px;
 }
 
 .api-banner.hidden { display: none; }
-
 .warn-icon { font-size: 14px; }
 
 .link-btn {
   background: transparent;
   border: none;
   color: var(--green);
-  font-family: var(--font-mono);
+  font-family: 'Share Tech Mono', monospace;
   font-size: 12px;
   cursor: pointer;
   text-decoration: underline;
@@ -131,6 +130,30 @@ body::before {
 }
 
 .link-btn:hover { color: var(--dgreen); }
+
+/* ── BADGES ── */
+.badge {
+  display: inline-block;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  padding: 3px 10px;
+  margin-bottom: .8rem;
+  text-transform: uppercase;
+}
+
+.ai-badge {
+  border: 1px solid var(--purple);
+  color: var(--purple);
+  background: rgba(191,127,255,.06);
+}
+
+.real-badge {
+  border: 1px solid var(--green);
+  color: var(--green);
+  background: rgba(0,255,65,.06);
+}
 
 /* ── TABS ── */
 .tabs {
@@ -144,45 +167,32 @@ body::before {
   background: transparent;
   border: 1px solid var(--border);
   color: var(--muted);
-  font-family: var(--font-mono);
+  font-family: 'Share Tech Mono', monospace;
   font-size: 12px;
   padding: 7px 16px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all .15s;
   letter-spacing: 1px;
 }
 
-.tab:hover {
-  border-color: var(--dgreen);
-  color: var(--dgreen);
-}
-
-.tab.active {
-  border-color: var(--green);
-  color: var(--bg);
-  background: var(--green);
-  font-weight: 700;
-}
+.tab:hover         { border-color: var(--dgreen); color: var(--dgreen); }
+.tab.active        { border-color: var(--green); color: var(--bg); background: var(--green); font-weight: 700; }
 
 /* ── PANELS ── */
-.panel {
-  display: none;
-  padding-top: 1.2rem;
-}
-
-.panel.active { display: block; }
+.panel          { display: none; padding-top: 1.2rem; }
+.panel.active   { display: block; }
 
 /* ── INPUTS ── */
 .input-row {
   display: flex;
   gap: 8px;
-  margin-bottom: 0.8rem;
+  margin-bottom: .8rem;
   align-items: flex-end;
   flex-wrap: wrap;
 }
 
-.field { flex: 1; min-width: 150px; }
-.field.short { max-width: 200px; }
+.field             { flex: 1; min-width: 150px; }
+.field.short       { max-width: 220px; }
 
 .field label,
 .field > span {
@@ -191,31 +201,27 @@ body::before {
   color: var(--muted);
   letter-spacing: 1px;
   margin-bottom: 4px;
-  font-family: var(--font-ui);
+  font-family: 'Rajdhani', sans-serif;
   text-transform: uppercase;
 }
 
-input,
-select,
-textarea {
+input, select, textarea {
   background: #080e08;
   border: 1px solid var(--border);
   color: var(--text);
-  font-family: var(--font-mono);
+  font-family: 'Share Tech Mono', monospace;
   font-size: 13px;
   padding: 8px 10px;
   width: 100%;
   outline: none;
-  transition: border-color 0.15s;
-  appearance: none;
+  transition: border-color .15s;
   -webkit-appearance: none;
+  appearance: none;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+input:focus, select:focus, textarea:focus {
   border-color: var(--green);
-  box-shadow: 0 0 0 1px rgba(0,255,65,0.15);
+  box-shadow: 0 0 0 1px rgba(0,255,65,.12);
 }
 
 input::placeholder { color: var(--muted); }
@@ -225,6 +231,7 @@ select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%234a7a4a'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
+  background-color: #080e08;
   padding-right: 28px;
 }
 
@@ -235,34 +242,22 @@ select option { background: #0a0c0f; }
   background: transparent;
   border: 1px solid var(--green);
   color: var(--green);
-  font-family: var(--font-mono);
+  font-family: 'Share Tech Mono', monospace;
   font-size: 12px;
   padding: 9px 22px;
   cursor: pointer;
   letter-spacing: 1px;
   white-space: nowrap;
-  transition: all 0.12s ease;
+  transition: all .12s;
   text-transform: uppercase;
-  height: fit-content;
   align-self: flex-end;
 }
 
-.btn:hover {
-  background: var(--green);
-  color: var(--bg);
-}
+.btn:hover  { background: var(--green); color: var(--bg); }
+.btn:active { transform: scale(.97); }
 
-.btn:active { transform: scale(0.97); }
-
-.btn.danger {
-  border-color: var(--red);
-  color: var(--red);
-}
-
-.btn.danger:hover {
-  background: var(--red);
-  color: var(--bg);
-}
+.btn.danger              { border-color: var(--red); color: var(--red); }
+.btn.danger:hover        { background: var(--red); color: var(--bg); }
 
 /* ── OPTION BUTTONS ── */
 .options-grid {
@@ -276,25 +271,17 @@ select option { background: #0a0c0f; }
   background: transparent;
   border: 1px solid var(--border);
   color: var(--muted);
-  font-family: var(--font-mono);
+  font-family: 'Share Tech Mono', monospace;
   font-size: 11px;
   padding: 5px 12px;
   cursor: pointer;
-  transition: all 0.15s;
-  letter-spacing: 0.5px;
+  transition: all .15s;
+  letter-spacing: .5px;
   white-space: nowrap;
 }
 
-.opt-btn.sel {
-  border-color: var(--green);
-  color: var(--green);
-  background: rgba(0, 255, 65, 0.07);
-}
-
-.opt-btn:hover {
-  border-color: var(--dgreen);
-  color: var(--dgreen);
-}
+.opt-btn.sel  { border-color: var(--green); color: var(--green); background: rgba(0,255,65,.07); }
+.opt-btn:hover { border-color: var(--dgreen); color: var(--dgreen); }
 
 /* ── TERMINAL ── */
 .term-header {
@@ -306,58 +293,48 @@ select option { background: #0a0c0f; }
   border: 1px solid var(--border);
   border-bottom: none;
   font-size: 11px;
-  font-family: var(--font-ui);
+  font-family: 'Rajdhani', sans-serif;
   letter-spacing: 1px;
   color: var(--muted);
   text-transform: uppercase;
 }
 
 .dots { display: flex; gap: 5px; }
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
+.dot  { width: 10px; height: 10px; border-radius: 50%; }
 .dot.r { background: #ff5f57; }
 .dot.y { background: #febc2e; }
 .dot.g { background: #28c840; }
-
 .term-title { flex: 1; text-align: center; }
 
 .terminal {
   background: var(--panel);
   border: 1px solid var(--border);
   padding: 1rem;
-  min-height: 240px;
-  max-height: 420px;
+  min-height: 260px;
+  max-height: 440px;
   overflow-y: auto;
   font-size: 13px;
-  line-height: 1.75;
+  line-height: 1.8;
 }
 
-.terminal::-webkit-scrollbar { width: 4px; }
+.terminal::-webkit-scrollbar       { width: 4px; }
 .terminal::-webkit-scrollbar-thumb { background: var(--border); }
-.terminal::-webkit-scrollbar-track { background: transparent; }
 
-/* ── TERMINAL LINE TYPES ── */
-.line { display: block; }
-
-.line.cmd   { color: var(--green); }
-.line.info  { color: var(--text); }
-.line.warn  { color: var(--amber); }
-.line.err   { color: var(--red); }
+/* ── LINE TYPES ── */
+.line         { display: block; animation: fadein .07s ease; }
+.line.cmd     { color: var(--green); }
+.line.info    { color: var(--text); }
+.line.warn    { color: var(--amber); }
+.line.err     { color: var(--red); }
 .line.success { color: #41ff8c; }
-.line.muted { color: var(--muted); }
-.line.blue  { color: var(--blue); }
+.line.muted   { color: var(--muted); }
+.line.blue    { color: var(--blue); }
+.line.purple  { color: var(--purple); }
 
 @keyframes fadein {
-  from { opacity: 0; transform: translateX(-4px); }
+  from { opacity: 0; transform: translateX(-3px); }
   to   { opacity: 1; transform: translateX(0); }
 }
-
-.line { animation: fadein 0.06s ease; }
 
 /* ── BLINKING CURSOR ── */
 .blink { animation: blink 1s step-end infinite; }
@@ -376,7 +353,7 @@ select option { background: #0a0c0f; }
   color: var(--muted);
   text-align: center;
   letter-spacing: 1px;
-  font-family: var(--font-ui);
+  font-family: 'Rajdhani', sans-serif;
 }
 
 /* ── MODAL ── */
@@ -384,7 +361,7 @@ select option { background: #0a0c0f; }
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0,0,0,.88);
   z-index: 1000;
   align-items: center;
   justify-content: center;
@@ -397,7 +374,7 @@ select option { background: #0a0c0f; }
   border: 1px solid var(--green);
   padding: 1.5rem;
   width: 100%;
-  max-width: 460px;
+  max-width: 480px;
   margin: 1rem;
 }
 
@@ -409,7 +386,7 @@ select option { background: #0a0c0f; }
 }
 
 .modal-title {
-  font-family: var(--font-ui);
+  font-family: 'Rajdhani', sans-serif;
   font-size: 16px;
   color: var(--green);
   letter-spacing: 2px;
@@ -422,7 +399,6 @@ select option { background: #0a0c0f; }
   color: var(--muted);
   font-size: 16px;
   cursor: pointer;
-  font-family: var(--font-mono);
 }
 
 .modal-close:hover { color: var(--red); }
@@ -430,34 +406,27 @@ select option { background: #0a0c0f; }
 .modal-desc {
   font-size: 12px;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: 1rem;
 }
 
-.modal-desc code {
-  color: var(--green);
-  font-family: var(--font-mono);
-}
+.modal-desc code { color: var(--green); font-family: 'Share Tech Mono', monospace; }
 
 .modal-hint {
-  margin-top: 0.8rem;
+  margin-top: .8rem;
   font-size: 11px;
   color: var(--muted);
 }
 
-.modal-hint a {
-  color: var(--blue);
-  text-decoration: none;
-}
-
+.modal-hint a { color: var(--blue); text-decoration: none; }
 .modal-hint a:hover { text-decoration: underline; }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 600px) {
-  .subtitle { display: none; }
-  .logo { font-size: 20px; }
-  .tab { font-size: 11px; padding: 6px 10px; }
-  .btn { padding: 9px 14px; }
-  .field.short { max-width: 100%; }
-  .terminal { font-size: 12px; }
+@media (max-width: 620px) {
+  .subtitle          { display: none; }
+  .logo              { font-size: 20px; }
+  .tab               { font-size: 11px; padding: 6px 10px; }
+  .btn               { padding: 9px 14px; }
+  .field.short       { max-width: 100%; }
+  .terminal          { font-size: 12px; min-height: 200px; }
 }
